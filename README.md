@@ -55,17 +55,31 @@ We have provided test data for all the resources.
 ### Commits
 
 - [x] Initial commit
-Commit your code regularly and meaningfully. This helps both you (in case you ever need to return to old code for any number of reasons) and your team lead as the evaluate your solution.
+      Commit your code regularly and meaningfully. This helps both you (in case you ever need to return to old code for any number of reasons) and your team lead as the evaluate your solution.
 
 ## Interview Questions
 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+   <!-- Javascript on the server: makes sharing code between the client and the server easier because the language and paradigm are the same and there is less context switching.  -->
+   <!-- Single-threaded: makes code more simple with less complexity from multiple heads.  -->
+   <!-- Asynchronous processing: abilities make it easier for a single CPU to take advantage of the processor its using to run. -->
+   <!-- NPM repository accessability: makes one of the largest systems of libraries available and easy to use. -->
 1. Understand and explain the use of Middleware?
+<!-- Middleware is any kind of functionality that is put in between two other functionalities. This is useful because it can interrupt or change the functionality depending on certain factors involving the middleware specifically. -->
 1. The basic principles of the REST architectural style.
+<!-- REST architectural style (Representational State Transfer) is .... It must have some components of the following guidelines:
+  Client-Server: UI and data storage separated
+  Stateless: session state must be stored on client
+  Cacheable: cacheable responses must be able to be reused
+  Uniform Interface: architecture must be designed in a uniform way
+  Layered System: component behavior must be so that each component can not see beyond the layer they are interacting
+  Code on demand: must be able to reduce the number of features by downloading applets or scripts -->
 1. Understand and explain the use of Express Routers.
+<!-- Routing in Express (similar to other processes of routing) refers to using express.Routing functionality to manipulate how an applications endpoints respond to client requests primarily by moving them (separation of concerns) to other places where they can be organized more easily. -->
 1. Describe tooling used to manually test the correctness of an API.
+<!-- The tool that I use to test the correctness of an API is "Postman". Postman automates requests made to the server so that endpoints products can be viewed and tested without breaking the API in production. -->
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade.
 
