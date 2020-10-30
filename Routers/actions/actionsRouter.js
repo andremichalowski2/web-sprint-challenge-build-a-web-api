@@ -34,7 +34,24 @@ const actions = require('../../data/helpers/actionModel'); //import functions
       });
   });
 
-  // router.post('/', (req, res) => {...}
+
+  //POST----------------------------------------------------------------//
+
+  //CREATE ACTION
+  router.post("/actions", (req, res) => {
+    actions
+      .insert(req.body)
+      .then((action) => {
+        res.status(201).json(action);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: "Error creating action.",
+        });
+      });
+  });
+
+
   // router.delete('/:id', (req, res) => {...}
   // router.put('/:id', (req, res) => {...}
 
