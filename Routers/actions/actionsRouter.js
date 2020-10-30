@@ -21,7 +21,7 @@ const actions = require('../../data/helpers/actionModel'); //import functions
   });
   
   //GET ACTION BY ID
-  router.get("/actions/:id", (req, res) => {
+  router.get("/actions/:id", validateActionId, (req, res) => {
     actions
       .get(req.params.id)
       .then((action) => {
@@ -38,7 +38,7 @@ const actions = require('../../data/helpers/actionModel'); //import functions
   //POST----------------------------------------------------------------//
 
   //CREATE ACTION
-  router.post("/actions", (req, res) => {
+  router.post("/actions", validateActionData, (req, res) => {
     actions
       .insert(req.body)
       .then((action) => {
@@ -55,7 +55,7 @@ const actions = require('../../data/helpers/actionModel'); //import functions
   //PUT----------------------------------------------------------------//
 
   //UPDATE ACTION
-  router.put("/actions/:id", (req, res) => {
+  router.put("/actions/:id", validateActionId, (req, res) => {
     actions
       .update(req.params.id, req.body)
       .then((action) => {
@@ -71,7 +71,7 @@ const actions = require('../../data/helpers/actionModel'); //import functions
   //DELETE----------------------------------------------------------------//
 
   //DELETE ACTION
-  router.delete("/actions/:id", (req, res) => {
+  router.delete("/actions/:id", validateActionId, validateActionData, (req, res) => {
     actions
       .remove(req.params.id)
       .then((action) => {
@@ -93,5 +93,40 @@ const actions = require('../../data/helpers/actionModel'); //import functions
       environment: process.env.NODE_ENV
     });
   });
+
+
+//VALIDATION----------------------------------------------------------------//
+
+//VALIDATION ACTION ID
+function validateActionId(req, res, next) {
+  actions
+    .get(req.params.id)
+    .then((action) => {
+      if (action) {
+        req.action = action;
+        next();
+      } else {
+        res.status(404).json({
+          message: `No action ID#${req.params.id} can be found.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: `Error retreiving action ID#${req.params.id}.`,
+      });
+    });
+}
+
+//VALIDATION ACTION DATA
+function validateActionData(req, res, next) {
+  if (!req.body.notes || !req.body.description || !req.body.project_id) {
+    res.status(400).json({
+      message: "Missing description or project_id.",
+    });
+  } else {
+    next();
+  }
+}
 
 module.exports = router; //export

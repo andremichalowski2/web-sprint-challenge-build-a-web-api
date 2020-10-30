@@ -114,8 +114,8 @@ You are expected to be able to answer questions in these areas. Your responses c
 
   #### Build an API
 
-  - [ ] Design and build endpoints for performing CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
-  - [ ] Add an endpoint for retrieving the list of actions for a project.
+  - [x] Design and build endpoints for performing CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`. If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
+  - [x] Add an endpoint for retrieving the list of actions for a project.
   - [x] Use an HTTP client like `postman` or `insomnia` to test the API's endpoints.
   - [x] Use Express Routers to organize the API's code.
 
