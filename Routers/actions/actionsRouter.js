@@ -51,9 +51,24 @@ const actions = require('../../data/helpers/actionModel'); //import functions
       });
   });
 
+  
+  //PUT----------------------------------------------------------------//
+
+  //UPDATE ACTION
+  router.put("/actions/:id", (req, res) => {
+    actions
+      .update(req.params.id, req.body)
+      .then((action) => {
+        res.status(200).json(action);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: "Error updating action.",
+        });
+      });
+  });
 
   // router.delete('/:id', (req, res) => {...}
-  // router.put('/:id', (req, res) => {...}
 
   router.get("/actionsTest", (req, res) => {
     res.status(200).json({
