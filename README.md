@@ -54,6 +54,7 @@ We have provided test data for all the resources.
 
 ### Commits
 
+- [x] Initial commit
 Commit your code regularly and meaningfully. This helps both you (in case you ever need to return to old code for any number of reasons) and your team lead as the evaluate your solution.
 
 ## Interview Questions
