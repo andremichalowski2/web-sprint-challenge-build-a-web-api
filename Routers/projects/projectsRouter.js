@@ -65,10 +65,32 @@ const projects = require('../../data/helpers/projectModel'); //import functions
       });
   });
 
+  
+  //PUT----------------------------------------------------------------//
 
-  // router.post('/', (req, res) => {...}
+  // CREATE PROJECT
+  router.put(
+    "/projects/:id",
+    (req, res) => {
+      projects
+        .update(req.params.id, req.body)
+        .then((project) => {
+          res.json(project);
+        })
+        .catch((err) => {
+          res.status(500).json({
+            message: "Error updating.",
+          });
+        });
+    }
+  );
+
+
+
+
+
+
   // router.delete('/:id', (req, res) => {...}
-  // router.put('/:id', (req, res) => {...}
 
   router.get("/projectTest", (req, res) => {
     res.status(200).json({
