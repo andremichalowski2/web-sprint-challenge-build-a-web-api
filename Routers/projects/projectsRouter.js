@@ -85,12 +85,24 @@ const projects = require('../../data/helpers/projectModel'); //import functions
     }
   );
 
+  //DELETE----------------------------------------------------------------//
 
+  //DELETE PROJECT
+  router.delete("/projects/:id", (req, res) => {
+    projects
+      .remove(req.params.id)
+      .then((project) => {
+        res.json({
+          message: `Project #${req.params.id} deleted.`,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: `Error deleting #${req.params.id} Please try again.`,
+        });
+      });
+  });
 
-
-
-
-  // router.delete('/:id', (req, res) => {...}
 
   router.get("/projectTest", (req, res) => {
     res.status(200).json({
