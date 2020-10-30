@@ -68,7 +68,24 @@ const actions = require('../../data/helpers/actionModel'); //import functions
       });
   });
 
-  // router.delete('/:id', (req, res) => {...}
+  //DELETE----------------------------------------------------------------//
+
+  //DELETE ACTION
+  router.delete("/actions/:id", (req, res) => {
+    actions
+      .remove(req.params.id)
+      .then((action) => {
+        res.status(200).json({
+          message: "Action successfully deleted.",
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: "Error deleting action. Please try again.",
+        });
+      });
+  });
+
 
   router.get("/actionsTest", (req, res) => {
     res.status(200).json({
