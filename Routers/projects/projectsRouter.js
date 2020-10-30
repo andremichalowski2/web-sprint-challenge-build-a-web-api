@@ -3,8 +3,53 @@ const router = express.Router(); //instantiate
 
 const projects = require('../../data/helpers/projectModel'); //import functions
 
-  // router.get('/', (req, res) => {...}
-  // router.get('/:id', (req, res) => {...}
+  //GET----------------------------------------------------------------//
+  
+  //GET PROJECTS
+
+  router.get('/projects', (req, res) => {
+    projects
+      .get()
+      .then((project) => {
+        res.status(200).json(project);
+      })
+      .catch((err) => {
+        res.status(500).json({ message: "Error retreiving project" });
+      });
+  });
+
+  //GET PROJECT BY ID
+
+  router.get("/projects/:id", (req, res) => {
+    projects
+      .get(req.params.id)
+      .then((project) => {
+        res.status(200).json(project);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: "Error retreiving project.",
+        });
+      });
+  });
+
+  //GET PROJECT ACTIONS
+
+  router.get("/projects/:id/actions", (req, res) => {
+    projects
+      .getProjectActions(req.params.id)
+      .then((actions) => {
+        res.status(200).json(actions);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: "Error retreiving actions.",
+        });
+      });
+  });
+
+
+
   // router.post('/', (req, res) => {...}
   // router.delete('/:id', (req, res) => {...}
   // router.put('/:id', (req, res) => {...}
