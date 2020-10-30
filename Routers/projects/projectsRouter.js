@@ -49,6 +49,22 @@ const projects = require('../../data/helpers/projectModel'); //import functions
   });
 
 
+  //POST----------------------------------------------------------------//
+
+  // POST PROJECT
+  router.post("/projects", (req, res) => {
+    projects
+      .insert(req.body)
+      .then((project) => {
+        res.status(201).json(project);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: "Error creating project.",
+        });
+      });
+  });
+
 
   // router.post('/', (req, res) => {...}
   // router.delete('/:id', (req, res) => {...}
