@@ -20,7 +20,7 @@ const projects = require('../../data/helpers/projectModel'); //import functions
 
   //GET PROJECT BY ID
 
-  router.get("/projects/:id", (req, res) => {
+  router.get("/projects/:id", validateProjectId, (req, res) => {
     projects
       .get(req.params.id)
       .then((project) => {
@@ -35,7 +35,7 @@ const projects = require('../../data/helpers/projectModel'); //import functions
 
   //GET PROJECT ACTIONS
 
-  router.get("/projects/:id/actions", (req, res) => {
+  router.get("/projects/:id/actions", validateProjectId, (req, res) => {
     projects
       .getProjectActions(req.params.id)
       .then((actions) => {
@@ -52,7 +52,7 @@ const projects = require('../../data/helpers/projectModel'); //import functions
   //POST----------------------------------------------------------------//
 
   // POST PROJECT
-  router.post("/projects", (req, res) => {
+  router.post("/projects", validateProjectData, (req, res) => {
     projects
       .insert(req.body)
       .then((project) => {
@@ -70,7 +70,9 @@ const projects = require('../../data/helpers/projectModel'); //import functions
 
   // CREATE PROJECT
   router.put(
-    "/projects/:id",
+    "/projects/:id", 
+    validateProjectId,
+    validateProjectData,
     (req, res) => {
       projects
         .update(req.params.id, req.body)
@@ -88,7 +90,7 @@ const projects = require('../../data/helpers/projectModel'); //import functions
   //DELETE----------------------------------------------------------------//
 
   //DELETE PROJECT
-  router.delete("/projects/:id", (req, res) => {
+  router.delete("/projects/:id", validateProjectId, (req, res) => {
     projects
       .remove(req.params.id)
       .then((project) => {
@@ -102,6 +104,41 @@ const projects = require('../../data/helpers/projectModel'); //import functions
         });
       });
   });
+
+
+//VALIDATION----------------------------------------------------------------//
+
+// VALIDATE PROJECT ID
+function validateProjectId(req, res, next) {
+  projects
+    .get(req.params.id)
+    .then((project) => {
+      if (project) {
+        req.project = project;
+        next();
+      } else {
+        res.status(404).json({
+          message: `No project ID# ${req.params.id}.`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: `Error retrieving ID# ${req.params.id}.`,
+      });
+    });
+}
+
+// VALIDATE REQUIRED INFO EXISTS
+function validateProjectData(req, res, next) {
+  if (!req.body.name || !req.body.description) {
+    res.status(400).json({
+      message: "Missing name or description data.",
+    });
+  } else {
+    next();
+  }
+}
 
 
   router.get("/projectTest", (req, res) => {
